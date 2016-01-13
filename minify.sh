@@ -1,7 +1,8 @@
 #!/bin/bash
 
 F=$1
-EXTENSION=${F##*.}
+EXT=${F##*.}
+EXTENSION=${EXT,,}
 FILENAME=${F%.*}
 
 if [[ "$EXTENSION" = "css" || "$EXTENSION" = "js" ]] ;
@@ -27,12 +28,16 @@ then
   jpegtran -copy none -optimize -perfect -outfile "$FILENAME.min.$EXTENSION" "$F"
   touch "$F" "$FILENAME.min.$EXTENSION"
   echo "created $FILENAME.min.$EXTENSION"
+elif [[ "$EXTENSION" = "gif" ]] ;
+then
+  gifsicle -O3 "$F" -o "$FILENAME.min.gif" >/dev/null
+  touch "$F" "$FILENAME.min.gif"
+  echo "created $FILENAME.min.gif"
 elif [[ "$EXTENSION" = "png" ]] ;
 then
   zopflipng --iterations=10 --splitting=3 --filters=01234mepb --lossy_8bit --lossy_transparent -y "$F" "$FILENAME.min.png" >/dev/null
   touch "$F" "$FILENAME.min.png"
   echo "created $FILENAME.min.png"
 else
-     :
- #echo "For use with CSS, HTML, JPG, ICO, SVG, TXT, and XML files only."
+  :
 fi
