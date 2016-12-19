@@ -35,7 +35,7 @@ make
 cp src/gifsicle $BINDIR
 
 # Download yuicompressor
-wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor-2.4.8.jar -O /usr/local/lib/minify/yuicompressor-2.4.8.jar
+wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor-2.4.8.jar -O $LIBDIR/minify/yuicompressor-2.4.8.jar
 
 # Install the minify command locally
 cd ..
