@@ -12,20 +12,18 @@ The **minify** script helps reduce the size of common website elements:
 
 ```
 git clone https://github.com/michaelmawhinney/minify.git
-cd minify/
-chmod +x install.sh
-./install.sh
+sudo sh minify/install.sh
 ```
 
 ## Usage
 
 To _minify_ 1 or more files:
 
-`minify <file1> <file2> <file3> ...`
+`minify -z <file1> <file2> <file3> ...`
 
 To _minify_ all files in a directory:
 
-`minify /path/to/directory/*`
+`minify -z /path/to/directory/*`
 
 To _minify_ all files in the current directory:
 
@@ -33,7 +31,7 @@ To _minify_ all files in the current directory:
 
 ### Example Usage
 
-`minify index.html style.css image1.jpg image2.png logo.svg`
+`minify -z index.html style.css image1.jpg image2.png logo.svg`
 
 This command would create the following files:
 
@@ -41,6 +39,6 @@ This command would create the following files:
 - style.min.css
 - style.min.css.gz
 - image1.min.jpg
-- image2,min.png
+- image2.min.png
 - logo.min.svg
 - logo.min.svg.gz

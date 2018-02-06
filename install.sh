@@ -1,48 +1,28 @@
 #!/bin/bash
 
 BINDIR="/usr/local/bin"
-LIBDIR="/usr/local/lib"
 
-# Create the minify directory
-mkdir "$LIBDIR/minify"
+# GIF manipulation
+apt-get -qq install -y gifsicle > /dev/null
 
-# Download and compile zopfli & zopflipng
-git clone https://github.com/google/zopfli.git
-cd zopfli/
-make zopfli
-make zopflipng
-cp zopfli zopflipng $BINDIR
+# JPG manipulation
+apt-get -qq install -y libjpeg-turbo-progs > /dev/null
 
-# Install svgo 
-npm install -g svgo
+# PNG manipulation
+apt-get -qq install -y pngcrush > /dev/null
 
-# Download and install jpegtran
-cd ..
-wget http://www.ijg.org/files/jpegsrc.v9b.tar.gz
-tar -xzf jpegsrc.v9b.tar.gz
-cd jpeg-9b/
-./configure
-make
-cp jpegtran $BINDIR
+# SVG optimization
+apt-get -qq install -y npm > /dev/null
+npm install --quiet --silent -g svgo > /dev/null 2>&1
 
-# Download and install gifsicle
-cd ..
-git clone https://github.com/kohler/gifsicle.git
-cd gifsicle/
-./bootstrap.sh
-./configure
-make
-cp src/gifsicle $BINDIR
+# Zopfli (File compression)
+apt-get -qq install -y zopfli > /dev/null
 
-# Download yuicompressor
-wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor-2.4.8.jar -O $LIBDIR/minify/yuicompressor-2.4.8.jar
+# YUI-compressor (JavaScript and CSS)
+apt-get -qq install -y yui-compressor > /dev/null
 
 # Install the minify command locally
-cd ..
-sed 's,LIBDIR,'"$LIBDIR"',' minify.txt > $BINDIR/minify
-chmod +x $BINDIR/minify
+chmod +x ./minify.sh
+cp ./minify.sh $BINDIR/minify
 
-# Clean up
-echo "Cleaning up..."
-rm -rf gifsicle/ jpeg-9b/ jpegsrc.v9b.tar.gz zopfli/
-echo "Done."
+echo "The 'minify' command has been copied to /usr/local/bin"
