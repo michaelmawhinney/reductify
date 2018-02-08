@@ -12,7 +12,9 @@ The **minify** script helps reduce the size of common website elements:
 
 ```
 git clone https://github.com/michaelmawhinney/minify.git
-sudo sh minify/install.sh
+cd ./minify
+sudo apt-get update
+sudo sh install.sh
 ```
 
 ## Usage
